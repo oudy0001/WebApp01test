@@ -1,0 +1,313 @@
+var map, home, contact, mapIcon, homeIcon, phoneIcon, style, styleString = "", pages, target, DisplayPage = "",
+    brwoserAnimationSupport = ["-webkit-"];
+
+var contactOutput, error1output, error2output, error3output, error4output;
+
+var init = function () {
+    pages = document.getElementById("pages");
+    style = document.getElementById("style");
+    target = document.getElementById("target");
+    map = document.getElementById("map");
+    home = document.getElementById("home");
+    contact = document.getElementById("contact");
+    mapIcon = document.getElementById("mapIcon");
+    homeIcon = document.getElementById("homeIcon");
+    phoneIcon = document.getElementById("phoneIcon");
+    
+    //constructor
+    //var classHolder = document.getElementById("//classHolder");
+
+
+    
+
+    
+    /*Thought I could make a css compiler and insert them in the page
+    var animationBuilder = function (animationType, direction, beginPosition, endPosition, opacityStart, opacityEnd, rotateStart, rotateEnd) {
+         styleString += "\n." + animationType + "{\n";
+         for(var i=1; i < brwoserAnimationSupport.length + 1; i++){
+             styleString += brwoserAnimationSupport[i-1] + "animation: " + animationType + " 2s;\n"; }
+        styleString += "}\n "
+        
+        for(var i=1; i < brwoserAnimationSupport.length + 1; i++){
+           styleString += "@" + brwoserAnimationSupport[i-1] + "keyframes " + animationType + " {\n \
+0%{top: 0%;\n \
+" + direction + ": " + beginPosition + ";\n \
+opacity:" + opacityStart + ";\n \
+" + brwoserAnimationSupport[i-1] + "transform: rototateY(" + rotateStart + "); }\n \
+100%{top: 0%;\n \
+" + direction + ": " + endPosition + ";\n \
+opacity:" + opacityEnd + ";\n \
+" + brwoserAnimationSupport[i-1] + "transform: rototateY(" + rotateEnd + "); }\n \
+";
+            
+        }
+    }//*/
+    
+    
+    //Thought I could make a css compiler and insert them in the page
+
+    /*
+    var animationBuilder = function (animationType, direction, beginPosition, endPosition, opacityStart, opacityEnd, rotateStart, rotateEnd) {
+         styleString += "<br>." + animationType + "{<br>";
+         for(var i=1; i < brwoserAnimationSupport.length + 1; i++){
+             styleString += brwoserAnimationSupport[i-1] + "animation: " + animationType + " 2s;<br>"; }
+        styleString += "}<br> "
+        
+        for(var i=1; i < brwoserAnimationSupport.length + 1; i++){
+           styleString += "@" + brwoserAnimationSupport[i-1] + "keyframes " + animationType + " {<br> \
+0%{top: 0%;\n \
+" + direction + ": " + beginPosition + ";<br> \
+opacity:" + opacityStart + ";<br> \
+" + brwoserAnimationSupport[i-1] + "transform: rototateY(" + rotateStart + "); }<br> \
+100%{top: 0%;<br> \
+" + direction + ": " + endPosition + ";<br> \
+opacity:" + opacityEnd + ";<br> \
+" + brwoserAnimationSupport[i-1] + "transform: rototateY(" + rotateEnd + "); }<br>";
+            
+        }
+    }//*/
+    
+    /*
+    animationBuilder("slideOutLeft", "left", "200px", "0px", 1, 0, "0deg", "90deg");
+    animationBuilder("slideOutRight", "left", "200px", "0px", 1, 0, "0deg", "90deg");
+    animationBuilder("slideOutLeft", "left", "200px", "0px", 1, 0, "0deg", "90deg");
+    animationBuilder("slideOutLeft", "left", "200px", "0px", 1, 0, "0deg", "90deg");
+    //*/
+    
+    
+    
+    //style.innerHTML += styleString;
+    
+    
+    //Animation Start
+    //I shoiuld have used a similar way of building hese functions as the animationBuilder function I made...by the time I realized this I didn't want to mess with something that was already working
+    var timeout = 1000;//time it takes to set to display none
+    
+    
+    homeIcon.addEventListener("click", function(){
+        //alert("clicked");
+        DisplayPage = "home"
+                mapIcon.className = "";
+                homeIcon.className = "active";
+                phoneIcon.className = "";
+        if(home.classList.contains("active")){}else{
+        var active = pages.querySelector(".active");
+            if (map == active){
+                map.className = "slideOutLeft";
+                home.className = "slideInRight active";
+                contact.className = "none";
+                //classHolder.innerHTML = "map SOL, home active, SIR";
+            }else{
+                map.className = "none";
+                home.className = "slideInLeft active";
+                contact.className= "slideOutRight";
+                //classHolder.innerHTML = "contact SOR, home active, SIL";
+                    
+            }
+                setTimeout(function(){
+                    if(DisplayPage == "home"){
+                    map.className = "none"
+                    contact.className = "none"}else{}
+                }, timeout);
+           
+                }
+        }
+    )
+        
+    
+    mapIcon.addEventListener("click", function(){
+        //alert("clicked");
+        DisplayPage = "map"
+                mapIcon.className = "active";
+                homeIcon.className = "";
+                phoneIcon.className = "";
+        if(map.classList.contains("active")){}else{
+        var active = pages.querySelector(".active");
+            if (contact == active){
+                map.className = "slideInRight active";
+                home.className = "none";
+                contact.className = "slideOutLeft";
+                //classHolder.innerHTML = "contact SOL, map active, SIR";
+            }else{
+                map.className = "slideInLeft active";
+                home.className= "slideOutRight";
+                contact.className = "none";
+                //classHolder.innerHTML = "home SOR, map active, SIL";
+            }
+                setTimeout(function(){
+                    if(DisplayPage == "map"){
+                    home.className = "none"
+                    contact.className = "none"}else{}
+                }, timeout);
+        }
+        
+    })
+    
+    phoneIcon.addEventListener("click", function(){
+        //alert("clicked");
+        DisplayPage = "phone"
+                mapIcon.className = "";
+                homeIcon.className = "";
+                phoneIcon.className = "active";
+        if(contact.classList.contains("active")){}else{
+        var active = pages.querySelector(".active");
+            if (home == active){
+                map.className = "none";
+                home.className = "slideOutLeft";
+                contact.className = "slideInRight active";
+                //classHolder.innerHTML = "home SOL, contact active, SIR";
+            }else{
+                map.className= "slideOutRight";
+                home.className = "none";
+                contact.className = "slideInLeft active";
+                //classHolder.innerHTML = "map SOR, contact active, SIL";
+            }
+                setTimeout(function(){
+                    if(DisplayPage == "phone"){
+                    map.className = "none"
+                    home.className = "none"}else{}
+                }, timeout);
+        }
+        
+    })
+    /*Animations End*/
+    
+    
+//window.screen.availHeight
+        //window.screen.availWidth
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    document.addEventListener("deviceready", function () {
+    contactOutput = document.getElementById("contactOutput");
+    error1output = document.getElementById("error1output");
+    error2output = document.getElementById("error2output");
+    error3output = document.getElementById("error3output");
+    error4output = document.getElementById("error4output");
+        
+        alert("on ready fired");
+        /*
+        var errFunc = function(){
+            alert("error = " + contatError.code);
+        }
+    
+    try{
+        var test1 = navigator.contacts.clone();
+        error3output.innerHTML = test1;
+    }catch (error){
+        error3output.innerHTML = error;
+    }
+    
+    
+    try{
+    var person = navigator.contacts.create();
+     }catch ( error ){
+        error1output.innerHTML = error;
+    };
+    /*
+    var num1 = new ContactField('mobile', '613-747-4723', true);
+phonenumbers = [ num1 ];
+person.phoneNumbers = phonenumbers;
+   //*/
+    /*
+    try{
+        var options = new ContactFindOptions( );
+    options.filter = "";  //leaving this empty will find return all contacts
+    options.multiple = true;  //return multiple results
+    var filter = ["displayName"];    //an array of fields to compare against the options.filter 
+    navigator.contacts.find(filter, successFunc, errFunc, options);
+    }catch ( error ){
+        error2output.innerHTML = error;
+    }
+    
+        
+    function successFunc( matches ){
+  for( var i=0; i<matches.length; i++){
+    error3output.innerHTML = matches[i].displayName ;
+       
+  } 
+}
+    
+    /*try{
+    var person = navigator.contacts.create( { "displayName": "Bob Smith", "name":{"givenName": "Cordova", "familyName":"Contact"} } ); 
+//person.save( successFunc, errFunc );                     
+                                             
+    person.birthday = new Date('1980/07/08');
+person.save( successFunc, errFunc );
+        
+        }catch ( error ){
+        error4output.innerHTML = error;
+    }*/
+     
+
+var RandomContactBtn = document.getElementById("btn");
+        
+RandomContactBtn.addEventListener("click", function(){        
+function onSuccess(contacts) {
+        error1output.innerHTML = "you have " + contacts.length + " contacts";
+     var randomNumber = Math.random() * (contacts.length - 1);
+    
+    
+    var randomInt = Math.round(randomNumber);
+    error3output.innerHTML = randomInt;
+        var randomContact = contacts[randomInt].displayName;
+    error4output.innerHTML = "heres a random contact " + randomContact + "<br> Thier number is : " + contacts[randomInt].phoneNumbers[0].value;
+}; 
+
+function onError(contactError) {
+    alert('onError!');
+};
+
+// find all contacts with a name field
+var options      = new ContactFindOptions();
+options.filter   = "";
+options.multiple = true;
+var fields       = ["displayName", "name"];  
+    navigator.contacts.find(fields, onSuccess, onError, options);
+               
+});
+        
+        
+    /*end of on ready*/
+    }, false);
+    
+    
+
+
+    
+    
+    
+    
+    
+    //HAMMER TIME!
+var myElement = document.getElementById('myElement');
+
+// create a simple instance
+// by default, it only adds horizontal recognizers
+var mc = new Hammer(myElement);
+
+// listen to events...
+mc.on("panleft panright tap press", function(ev) {
+    myElement.textContent = ev.type +" gesture detected.";
+});
+        
+    
+    
+    /*end of init*/
+}
+
+
+
+document.addEventListener("DOMContentLoaded", init);
+
+        
